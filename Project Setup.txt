@@ -1,0 +1,108 @@
+Steps:
+
+1. create an ec2 instance; open all ports in security group
+
+2. create a RDS instance 
+
+create a rds instance of MySQl type
+
+user - admin
+password - adminpassword
+
+free tier 
+
+storage capacity - 20 GB
+
+Disable auto storage scaling
+
+create a new security group (dont use an existing one)
+
+while creating the database, add the ec2 instance to access the rds; it will do the required setup.
+
+create the database
+
+
+4. on the ec2 instance 
+
+connect to the EC2 instance using the AWS Connect option via browser
+
+sudo su 
+
+wget <spring jar file> (from s3 bucket)
+
+sudo yum install mysql 
+Press y when asked during installation 
+
+sudo yum install java-1.8.0
+
+press y when asked for 
+
+
+mysql -u admin -h <db endpoint name>  -p
+password: adminpassword
+
+create database test; 
+
+exit;
+
+// create the application.properties with the following content:
+
+spring.datasource.url=jdbc:mysql://<specify the db endpoint>:3306/test
+spring.datasource.username=admin
+spring.datasource.password=adminpassword
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+hibernate.dialect.storage_engine=innodb
+spring.jpa.database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+spring.jpa.hibernate.ddl-auto=update
+
+
+// run the java application using the following commands
+
+java -jar springboot-backend.jar
+
+the application by default will run on port 8080
+
+
+5. create a load balancer and register the ec2 instance with the load balancer
+while registering the ec2 instance use port 8080
+
+6. once we have the load balancer address, then we need to add the same in the frontend UI files
+main.js
+
+7. create a new s3 bucket and make the following changes:
+a. make the bucket public by the policy, change the bucket name
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::<bucket-name>/*"
+        }
+    ]
+}
+
+b. Block public access (bucket settings) - set it to OFF
+
+c. in bucket permission, edit Cross-origin resource sharing (CORS) and add the following statements
+
+[
+    {
+        "AllowedHeaders": [],
+        "AllowedMethods": [
+            "GET",
+            "HEAD",
+            "POST",
+            "DELETE"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": []
+    }
+]
+
+d. enable the Static site hosting option  - set the index to index.html file 
+
