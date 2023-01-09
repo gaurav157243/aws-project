@@ -531,7 +531,7 @@ __webpack_require__.r(__webpack_exports__);
 class EmployeeService {
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.baseURL = "http://employee-alb-1751822524.us-east-1.elb.amazonaws.com/api/v1/employees";
+        this.baseURL = "http://aws-project-alb-1939464258.us-east-1.elb.amazonaws.com/api/v1/employees";
     }
     getEmployeesList() {
         return this.httpClient.get(`${this.baseURL}`);
