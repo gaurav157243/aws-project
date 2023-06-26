@@ -439,7 +439,7 @@ module.exports = content.locals || {};
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/gagrawal/Desktop/AWS/Angular-10-Spring-Boot-CRUD-Full-Stack-App/angular-frontend/src/styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! /Users/gagrawal/code/aws-project/angular-frontend/src/styles.css */"./src/styles.css");
 
 
 /***/ })

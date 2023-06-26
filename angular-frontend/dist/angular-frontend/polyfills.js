@@ -3033,7 +3033,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/gagrawal/Desktop/AWS/Angular-10-Spring-Boot-CRUD-Full-Stack-App/angular-frontend/src/polyfills.ts */"./src/polyfills.ts");
+module.exports = __webpack_require__(/*! /Users/gagrawal/code/aws-project/angular-frontend/src/polyfills.ts */"./src/polyfills.ts");
 
 
 /***/ })

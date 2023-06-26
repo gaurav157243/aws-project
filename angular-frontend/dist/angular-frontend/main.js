@@ -87,7 +87,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class AppComponent {
     constructor() {
-        this.title = 'Angular 10 Spring Boot CRUD Full Stack App';
+        this.title = 'Employee Management Web Application';
     }
 }
 AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(); };
@@ -115,7 +115,7 @@ AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCompo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "footer", 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "div", 6);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "span");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](15, "All Rights Reserved 2020 @JavaGuides");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](15, "All Rights Reserved 2020");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -531,7 +531,7 @@ __webpack_require__.r(__webpack_exports__);
 class EmployeeService {
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.baseURL = "http://aws-project-alb-1939464258.us-east-1.elb.amazonaws.com/api/v1/employees";
+        this.baseURL = "http://ec2-54-208-153-109.compute-1.amazonaws.com:8080/api/v1/employees";
     }
     getEmployeesList() {
         return this.httpClient.get(`${this.baseURL}`);
@@ -738,7 +738,7 @@ _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["platformBrowser"]().boot
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/gagrawal/Desktop/AWS/Angular-10-Spring-Boot-CRUD-Full-Stack-App/angular-frontend/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/gagrawal/code/aws-project/angular-frontend/src/main.ts */"./src/main.ts");
 
 
 /***/ })
