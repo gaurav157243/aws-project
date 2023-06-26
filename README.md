@@ -1,77 +1,170 @@
-# Angular-10-Spring-Boot-CRUD-Full-Stack-App
-Angular Spring Boot CRUD Full Stack App created for my YouTube course
+### Steps:
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 1 - Project Overview
-=> https://youtu.be/tLBX9fq813c
+### CREATE RDS INSTANCE
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 2 - Project Architecture and Development Process
-=> https://youtu.be/Uvy0CsBxdms
+Standard Create
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 3 - Create Spring Boot Project and Configure MySQL
-=> https://youtu.be/kpM5xV17S9U
+create a rds instance of MySQl type
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 4 - Creating JPA Entity + Repository
-=> https://youtu.be/PKt3Yr8mi5g
+Templates - Free Tier
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 5 - Creating List Employee REST API
-=> https://youtu.be/RA37EdWywjg
+Credentials:
+user - admin
+password - password
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 6 - Creating Angular App using Angular CLI
-=> https://youtu.be/ItRmRKaIwlo
+storage capacity - 20 GB
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 7 - Exploring Angular CLI Project Structure
-=> https://youtu.be/-FClmrfQBPw
+Disable auto storage scaling
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 8 - Angular App Components Overview
-=> https://youtu.be/1V4j7RESNK4
+Connectivity - Dont Connect to EC2
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 9 - Add Bootstrap 4 in Angular App
-=> https://youtu.be/PraK-poGy84
+Network type - IPv4
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 10 - Creating Angular Employee List Component
-=> https://youtu.be/wrb0_b4A0Xo
+VPC - default VPC
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 11 - Connecting Angular with List Employee REST API
-=> https://youtu.be/poQLnZU0eHc
+public access - Yes
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 11 - Connecting Angular with List Employee REST API
-=> https://youtu.be/poQLnZU0eHc
+create a new security group (dont use an existing one)
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 12 - Routing and Navigation in Angular App
-=> https://youtu.be/TUYyW0l8fiA
+Availiability zone - us-east-1a
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 13 - Creating Add Employee REST API
-=> https://youtu.be/qH7_1W8MKfs
+Database authentication 
+Password authentication
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 14 - Creating Angular Create Employee Component
-=> https://youtu.be/yYlMsNdAXJ4
-### Angular 10 + Spring Boot CRUD Full Stack App - 15 - Angular Create Employee Form Handling
-=> https://youtu.be/RTCRYdF7FBA
+Monitoring
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 16 - Connecting Angular with Create Employee REST API
-=> https://youtu.be/bh-HDtx-ppw
+Diable - Enhanced monitoring
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 17 - Creating REST API to Get Single Employee Object
-=> https://youtu.be/F2SIletJ7jc
-### Angular 10 + Spring Boot CRUD Full Stack App - 18 - Creating Update Employee REST API
-=> https://youtu.be/XG3cgNvVx9M
+create the database
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 19 - Create Angular Update Employee Component & Form
-=> https://youtu.be/Hog4sRXnsCE
+### Create a database on the RDS Instance 
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 20 - Connecting Angular with Get Employee REST API
-=> https://youtu.be/S4Q5yOxCnIY
+using DB weaver, connect to RDS and create a new database using the following sql command
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 21 - Connecting Angular with Update Employee REST API
-=> https://youtu.be/-Kz0hsW2k68
-### Angular 10 + Spring Boot CRUD Full Stack App - 22 - Creating DELETE REST API to Delete an Employee
-=> https://youtu.be/B8CF7IaevYk
+Hostname - endpoint name
+database - << keep it empty >>
+username - admin
+password - password
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 23 - Connecting Angular with Delete Employee REST API
-=> https://youtu.be/gS_2aVA0H3A
+create a database with name "test" using the DBeaver UI
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 24 - Creating View Employee Details Functionality
-=> https://youtu.be/eAXhAAyZu7U
+### Create EC2 Instance 
 
-### Angular 10 + Spring Boot CRUD Full Stack App - 25 - It's Demo Time and Source Code on GitHub
-=> https://youtu.be/m3_dJSqkFzU
+create an ec2 instance with amazon linux, with a key pair and open atleast port 22 and port 80 in the security group
+
+3.1 - once the EC2 is created, then go to Actions -> Networking -> Connect to RDS and connect to the RDS instance. This will establish the required connectivity between EC2 and RDS.
+
+4. on the ec2 instance, run the following commands:
+
+connect to the EC2 instance using the AWS Connect option via instance connect or via ssh 
+
+a. sudo su 
+
+b. wget https://gaurav-public-bucket.s3.amazonaws.com/project-data/springboot-backend.jar
+
+c. sudo yum -y install java-1.8.0
+
+d. create a file with the following details 
+
+## create the application.properties with the following content:
+vi application.properties
+
+press i key
+
+(paste the below lines in the application properties file)
+
+server.port=80
+spring.datasource.url=jdbc:mysql://database-1.cyvai2w24sic.us-east-1.rds.amazonaws.com:3306/test
+spring.datasource.username=admin
+spring.datasource.password=password
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+hibernate.dialect.storage_engine=innodb
+spring.jpa.database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+spring.jpa.hibernate.ddl-auto=update
+
+--- copy content end --- 
+
+press esc key
+press :wq
+
+
+## run the java application using the following commands
+
+java -jar springboot-backend.jar 
+
+the application by default will run on port 80
+
+If there is no error while running the application, then
+
+## stop the application by pressing Ctrl c
+
+and run the below command (this will prevent the application to stop if the ssh session is terminated)
+
+nohup java -jar springboot-backend.jar & 
+
+### create a load balancer and register the ec2 instance with the load balancer. 
+Allow mapping for all AZs. 
+In SG, allow all ports
+while registering the ec2 instance use port 80
+the ec2 intance should come to healthy state
+
+
+### create a new s3 bucket and make the following changes:
+
+a. make the bucket public by the policy, change the bucket name
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::<bucket-name>/*"
+        }
+    ]
+}
+
+b. Block public access (bucket settings) - set it to OFF
+
+c. download the following file - https://gaurav-public-bucket.s3.amazonaws.com/project-data/angular-frontend.zip 
+
+unzip the same and modify the main.js file and replace the load balancer to your load balancer 
+
+File - main.js
+
+search for /api/v1/enployees in the file and replace the "<<SPECIFY ALB DNS Name>>" with the new load balancer hostname
+
+this.baseURL = "http://<<SPECIFY ALB DNS Name>>/api/v1/employees";
+
+after making the changes, the above should like this:
+
+this.baseURL = "http://project-alb.something.aws.com/api/v1/employees";
+
+d. enable the Static site hosting option  - set the index to index.html file 
+
+
+### Below steps not required. 
+
+mysql -u admin -h <db endpoint name>  -p
+password: password
+
+SHOW DATABASES;
+
+// the below settings are not required.
+c. in bucket permission, edit Cross-origin resource sharing (CORS) and add the following statements
+
+[
+    {
+        "AllowedHeaders": [],
+        "AllowedMethods": [
+            "GET",
+            "HEAD",
+            "POST",
+            "DELETE"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": []
+    }
