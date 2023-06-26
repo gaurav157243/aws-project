@@ -1,35 +1,56 @@
-Steps:
+### Steps:
 
-1. create a RDS instance 
+### CREATE RDS INSTANCE
+
+Standard Create
 
 create a rds instance of MySQl type
 
+Templates - Free Tier
+
+Credentials:
 user - admin
 password - password
-
-free tier 
 
 storage capacity - 20 GB
 
 Disable auto storage scaling
 
-enable public access
+Connectivity - Dont Connect to EC2
+
+Network type - IPv4
+
+VPC - default VPC
+
+public access - Yes
 
 create a new security group (dont use an existing one)
 
+Availiability zone - us-east-1a
+
+Database authentication 
+Password authentication
+
+Monitoring
+
+Diable - Enhanced monitoring
+
 create the database
 
-2. using DB weaver, connect to RDS and create a new database using the following sql command
+### Create a database on the RDS Instance 
+
+using DB weaver, connect to RDS and create a new database using the following sql command
 
 Hostname - endpoint name
-database - mysql
+database - << keep it empty >>
 username - admin
 password - password
 
 create a database with name "test" using the DBeaver UI
 
+### Create EC2 Instance 
 
-3. create an ec2 instance; open all ports in security group
+create an ec2 instance with amazon linux, with a key pair and open atleast port 22 and port 80 in the security group
 
 3.1 - once the EC2 is created, then go to Actions -> Networking -> Connect to RDS and connect to the RDS instance. This will establish the required connectivity between EC2 and RDS.
 
@@ -41,11 +62,11 @@ a. sudo su
 
 b. wget https://gaurav-public-bucket.s3.amazonaws.com/project-data/springboot-backend.jar
 
-c. sudo yum -y install java-1.8.0 mysql
+c. sudo yum -y install java-1.8.0
 
 d. create a file with the following details 
 
-// create the application.properties with the following content:
+## create the application.properties with the following content:
 vi application.properties
 
 press i key
@@ -53,7 +74,7 @@ press i key
 (paste the below lines in the application properties file)
 
 server.port=80
-spring.datasource.url=jdbc:mysql://<database-1.cyvai2w24sic.us-east-1.rds.amazonaws.com>:3306/test
+spring.datasource.url=jdbc:mysql://database-1.cyvai2w24sic.us-east-1.rds.amazonaws.com:3306/test
 spring.datasource.username=admin
 spring.datasource.password=password
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect
@@ -67,7 +88,7 @@ press esc key
 press :wq
 
 
-// run the java application using the following commands
+## run the java application using the following commands
 
 java -jar springboot-backend.jar 
 
@@ -75,26 +96,20 @@ the application by default will run on port 80
 
 If there is no error while running the application, then
 
-stop the application by pressing Ctrl c
+## stop the application by pressing Ctrl c
 
 and run the below command (this will prevent the application to stop if the ssh session is terminated)
 
 nohup java -jar springboot-backend.jar & 
 
-5. create a load balancer and register the ec2 instance with the load balancer. 
+### create a load balancer and register the ec2 instance with the load balancer. 
 Allow mapping for all AZs. 
 In SG, allow all ports
 while registering the ec2 instance use port 80
 the ec2 intance should come to healthy state
 
-6. once we have the load balancer address, then we need to add the same in the frontend UI files
 
-main.js
-
-search for /api/v1 and replace the load balancer with the new load balancer.
-
-
-7. create a new s3 bucket and make the following changes:
+### create a new s3 bucket and make the following changes:
 
 a. make the bucket public by the policy, change the bucket name
 
@@ -113,17 +128,28 @@ a. make the bucket public by the policy, change the bucket name
 b. Block public access (bucket settings) - set it to OFF
 
 c. download the following file - https://gaurav-public-bucket.s3.amazonaws.com/project-data/angular-frontend.zip 
+
 unzip the same and modify the main.js file and replace the load balancer to your load balancer 
-search for api/v1 and then repalce alb
+
+File - main.js
+
+search for /api/v1/enployees in the file and replace the "<<SPECIFY ALB DNS Name>>" with the new load balancer hostname
+
+this.baseURL = "http://<<SPECIFY ALB DNS Name>>/api/v1/employees";
+
+after making the changes, the above should like this:
+
+this.baseURL = "http://project-alb.something.aws.com/api/v1/employees";
 
 d. enable the Static site hosting option  - set the index to index.html file 
 
 
-Below steps not required. 
+### Below steps not required. 
 
 mysql -u admin -h <db endpoint name>  -p
 password: password
 
+SHOW DATABASES;
 
 // the below settings are not required.
 c. in bucket permission, edit Cross-origin resource sharing (CORS) and add the following statements
@@ -142,4 +168,3 @@ c. in bucket permission, edit Cross-origin resource sharing (CORS) and add the f
         ],
         "ExposeHeaders": []
     }
-
