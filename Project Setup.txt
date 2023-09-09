@@ -22,7 +22,7 @@ Network type - IPv4
 
 VPC - default VPC
 
-public access - Yes
+**public access - Yes**
 
 create a new security group (dont use an existing one)
 
@@ -34,6 +34,10 @@ Password authentication
 Monitoring
 
 Diable - Enhanced monitoring
+
+Additional configuration 
+
+**Disable automated backup**
 
 create the database
 
