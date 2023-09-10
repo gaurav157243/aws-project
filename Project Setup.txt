@@ -51,7 +51,7 @@ connect to the EC2 instance using the AWS Connect option via instance connect or
 
 a. sudo su 
 
-b. wget https://gaurav-public-bucket.s3.amazonaws.com/project-data/springboot-backend.jar
+b. wget https://raw.githubusercontent.com/gaurav157243/aws-project/master/springboot-backend/springboot-backend.jar
 
 c. sudo yum -y install java-1.8.0
 
@@ -98,7 +98,7 @@ g. run the below command (this will prevent the application to stop if the ssh s
 
 nohup java -jar springboot-backend.jar & 
 
-Verify that the application is configured correctly by using the following url:
+h. Verify that the application is configured correctly by using the following url:
 
 http://<ec-ip-address>/api/v1/employees
 
@@ -141,53 +141,17 @@ a. make the bucket public by the policy, change the bucket name
 
 b. Block public access (bucket settings) - set it to OFF
 
-c. download the following file - https://gaurav-public-bucket.s3.amazonaws.com/project-data/angular-frontend.zip 
-unzip the same and modify the main.js file and replace the load balancer to your load balancer 
-search for api/v1 and then repalce alb
+c. download the following file by clicking on the link - https://raw.githubusercontent.com/gaurav157243/aws-project/master/angular.zip
+
+unzip the angular.zip file 
+modify the "main" file and replace the load balancer to your load balancer 
+search for api/v1/employees and then repalce alb
 
 d. enable the Static site hosting option  - set the index to index.html file 
 
 
 
-###### The below steps are not required
 
-Below steps not required. 
-
-3.1 - once the EC2 is created, then go to Actions -> Networking -> Connect to RDS and connect to the RDS instance. This will establish the required connectivity between EC2 and RDS.
-
-mysql -u admin -h <db endpoint name>  -p
-password: password
-
-SHOW DATABASES;
-
-// the below settings are not required.
-c. in bucket permission, edit Cross-origin resource sharing (CORS) and add the following statements
-
-[
-    {
-        "AllowedHeaders": [],
-        "AllowedMethods": [
-            "GET",
-            "HEAD",
-            "POST",
-            "DELETE"
-        ],
-        "AllowedOrigins": [
-            "*"
-        ],
-        "ExposeHeaders": []
-    }
-
-
-
-2. using DB weaver, connect to RDS and create a new database using the following sql command
-
-Hostname - endpoint name
-database - mysql
-username - admin
-password - password
-
-create a database with name "test" using the DBeaver UI
 
 SPRING_DATASOURCE_URL=jdbc:mysql://${RDS_HOSTNAME}:3306/test?createDatabaseIfNotExist=true
 SERVER_PORT=5000
