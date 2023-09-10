@@ -1,8 +1,5 @@
 ---
 Parameters:
-  SecurityGroupDescription:
-    Description: Security Group Description
-    Type: String
   KeyName:
     Description: Key Pair for EC2
     Type: 'AWS::EC2::KeyPair::KeyName'
@@ -174,7 +171,7 @@ Resources:
   EC2SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: !Ref SecurityGroupDescription
+      GroupDescription: "cloudformation security group"
       VpcId: !Ref VPC
       SecurityGroupIngress:
       - IpProtocol: tcp
