@@ -42,10 +42,9 @@ Disble automated backup
 create the database
 
 
-3. create a normal ec2 instance; open ports http and ssh in security group
+2. create a normal ec2 instance with amazon linux; allow ports http and ssh in security group
 
-
-4. on the ec2 instance, run the following commands:
+3. on the ec2 instance, run the following commands:
 
 connect to the EC2 instance using the AWS Connect option via instance connect or via ssh 
 
@@ -55,10 +54,6 @@ b. wget https://raw.githubusercontent.com/gaurav157243/aws-project/master/spring
 
 c. sudo yum -y install java-1.8.0
 
-wget https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
-dnf install -y mysql-community-server
-
-
 d. create a file with the following details 
 
 // create the application.properties with the following content:
@@ -67,6 +62,8 @@ vi application.properties
 press i key
 
 (paste the below lines in the application properties file)
+
+--- copy content start --- dont copy this line
 
 # temp file
 server.port=80
@@ -112,7 +109,7 @@ the ec2 intance should come to healthy state
 
 5b. Verify that the load balcner is working correctly by using the following from your browser tab:
 
-http://<alb dna name>/api/v1/employees
+http://<alb dns name>/api/v1/employees
 
 You should see [] as the response in the browser tab
 
@@ -149,8 +146,10 @@ search for api/v1/employees and then repalce alb
 
 d. enable the Static site hosting option  - set the index to index.html file 
 
+### The below commands are not required.
 
-
+wget https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
+dnf install -y mysql-community-server
 
 
 SPRING_DATASOURCE_URL=jdbc:mysql://${RDS_HOSTNAME}:3306/test?createDatabaseIfNotExist=true
