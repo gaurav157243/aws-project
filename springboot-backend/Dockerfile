@@ -5,7 +5,7 @@ FROM openjdk:8-jre-alpine
 WORKDIR /app
 
 # Copy the Spring Boot JAR file (replace 'your-app.jar' with your actual JAR file)
-COPY target/springboot-backend.jar /app/app.jar
+COPY target/springboot-backend-1.0.jar /app/app.jar
 
 # Expose the port that your Spring Boot application listens on (e.g., 8080)
 EXPOSE 80
