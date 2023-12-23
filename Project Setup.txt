@@ -136,6 +136,10 @@ unzip the angular.zip file
 modify the "main" file and replace the load balancer name to your load balancer 
 search for api/v1/employees and then repalce alb only
 
+The line should look like this:
+
+        this.baseURL = "http://prj-alb-1398592271.us-east-1.elb.amazonaws.com/api/v1/employees";
+
 d. enable the Static site hosting option  - set the index to index.html file 
 
 Now access the application using the static website url and try to add the employee details.
