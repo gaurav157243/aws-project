@@ -43,6 +43,7 @@ create the database
 
 
 2. create a normal ec2 instance with amazon linux; allow ports http and ssh in security group
+2.a - Select Ec2 --> Actions -> Networking -> Connect to RDS --> Database Role -> Instance -> Select Instance and save.
 
 3. on the ec2 instance, run the following commands:
 
