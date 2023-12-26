@@ -148,6 +148,21 @@ Now access the application using the static website url and try to add the emplo
 
 My sample link looks like the following - http://employee-ms-1234.s3-website-us-east-1.amazonaws.com/
 
+
+#### Vefification steps #####
+if you website is not working, then perform the following steps:
+
+* check if application is responding via the ec2 instance url - http://<ec-ip-address>/api/v1/employees. You should be able to get the [] response in the browser. 
+    * if above not working, then check if the RDS is publicly accessible.
+    * check the security group of the RDS and verify that all traffic is allowed.
+    * check the security group of the EC2 instance and verify that all traffic is allowed.
+* check if application is responding via the load balancer - http://<alb dns name>/api/v1/employees. You should be able to get the [] response in the browser. 
+    * if above not working, then check the Target Group and verify that the EC2 instance is in healthy state. 
+    * check the security group of the load baalancer and verify that all traffic is allowed.
+* check your s3 bucket is publicly accessbile. If not, then edit the Bucket Policy to make the bucket publicly accessible.
+* check if you have updated the load balaancer dns name in the angular.zip / main javascript file and uploaded the same in the s3 bucket along with all the other files.
+
+
 ### The below commands are not required.
 
 wget https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
