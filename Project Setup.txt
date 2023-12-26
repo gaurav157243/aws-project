@@ -156,6 +156,7 @@ if you website is not working, then perform the following steps:
     * if above not working, then check if the RDS is publicly accessible.
     * check the security group of the RDS and verify that all traffic is allowed.
     * check the security group of the EC2 instance and verify that all traffic is allowed.
+    * check if your application is actually running on the ec2 instance and actually on port 80.
 * check if application is responding via the load balancer - http://<alb dns name>/api/v1/employees. You should be able to get the [] response in the browser. 
     * if above not working, then check the Target Group and verify that the EC2 instance is in healthy state. 
     * check the security group of the load baalancer and verify that all traffic is allowed.
