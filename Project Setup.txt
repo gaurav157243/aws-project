@@ -103,8 +103,8 @@ You should see [] as the response in the browser tab
 5a. create a load balancer and register the ec2 instance with the load balancer. 
 Allow mapping for all AZs. 
 In SG, allow all ports
-while registering the ec2 instance use port 80
-the ec2 intance should come to healthy state
+Create a Target Group; while registering the EC2 instance, use port 80
+The ec2 intance should come to healthy state
 
 5b. Verify that the load balancer is working correctly by using the following from your browser tab:
 
